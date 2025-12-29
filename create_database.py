@@ -1,5 +1,5 @@
 # from langchain.document_loaders import DirectoryLoader
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader ## adding PyPDFLoader 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 # from langchain.embeddings import OpenAIEmbeddings
@@ -32,7 +32,8 @@ def generate_data_store():
 
 
 def load_documents():
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+    #loader = DirectoryLoader(DATA_PATH, glob="*.md") # old one, in case you need only md files
+    loader = DirectoryLoader(DATA_PATH, glob="*.pdf", loader_cls=PyPDFLoader) ## changing "*.md" for "*.pdf" and adding loader_cls
     documents = loader.load()
     return documents
 
